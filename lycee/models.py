@@ -80,3 +80,31 @@ class Student(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Presence(models.Model):
+    reason = models.CharField(
+        verbose_name="reason",
+        help_text="tell why the student is missing",
+        null=True,
+        max_length=255,
+    )
+    is_missing = models.BooleanField(
+        blank=False,
+        null=False
+    )
+    date = models.DateField(
+        verbose_name='date of call',
+        blank=False,
+        null=False
+    )
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE,
+        null=False
+    )
+    cursus = models.ForeignKey(
+        Cursus,
+        on_delete=models.CASCADE,
+        null=True
+    )

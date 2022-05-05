@@ -1,6 +1,6 @@
-from .models import Cursus, Student
+from .models import Cursus, Student, Presence
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import StudentForm
+from .forms import StudentForm, ParticularCallForm
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 
@@ -51,3 +51,12 @@ class StudentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('detail_student', args=(self.object.pk,))
+
+
+class ParticularCallCreateView(CreateView):
+    model = Presence
+    form_class = ParticularCallForm
+    template_name = 'lycee/particularcall.html'
+
+    def get_success_url(self):
+        return reverse('index')
