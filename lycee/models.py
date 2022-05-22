@@ -86,25 +86,68 @@ class Presence(models.Model):
     reason = models.CharField(
         verbose_name="reason",
         help_text="tell why the student is missing",
-        null=True,
+        null=False,
         max_length=255,
+        blank=False,
+        default="",
     )
     is_missing = models.BooleanField(
+        verbose_name="Is Missing",
+        default=True,
         blank=False,
         null=False
     )
     date = models.DateField(
         verbose_name='date of call',
         blank=False,
-        null=False
+        null=False,
     )
-    student = models.ForeignKey(
+    student = models.ManyToManyField(
         Student,
-        on_delete=models.CASCADE,
-        null=False
     )
     cursus = models.ForeignKey(
         Cursus,
         on_delete=models.CASCADE,
         null=True
     )
+
+    def get_absolute_url(self):
+        return reverse('index')
+
+    def __str__(self):
+        return '{} {} {} {}'.format(self.date, self.isMissing, self.reason, self.cursus)
+
+
+class ParticularPresence(models.Model):
+    date = models.DateField(
+        verbose_name="Date of call",
+        blank=False,
+        null=False,
+    )
+    is_missing = models.BooleanField(
+        verbose_name="Is Missing"
+    )
+    reason = models.CharField(
+        verbose_name="Reason",
+        help_text="Raison de l'absence",
+        blank=False,
+        null=False,
+        default="",
+        max_length=255,
+    )
+    cursus = models.ForeignKey(
+        Cursus,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
+    def get_absolute_url(self):
+        return reverse('index')
+
+    def __str__(self):
+        return '{} {} {} {}'.format(self.date, self.isMissing, self.reason, self.cursus)

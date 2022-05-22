@@ -1,0 +1,31 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{%if liste%}
+    {% block title %}
+    detail of call of row
+    {% endblock %}
+
+    {% block content %}
+        <div class="container">
+            <div class="row"><h3>Absent</h3></div>
+            {% for student in Absent_list %}
+                <div class="row">
+                    <div class='col-sm-2'>
+                        {{student.first_name}} {{student.last_name}}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row"><h3>Present</h3></div>
+            {% for student in Present_list %}
+                <div class="row">
+                    <div class='col-sm-2'>
+                        {{student.first_name}} {{student.last_name}}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+{% else %}
+    <p>No Cursus to show</p>
+{% endif %}

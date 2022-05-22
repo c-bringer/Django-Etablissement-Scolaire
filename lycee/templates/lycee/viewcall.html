@@ -1,0 +1,47 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{%if liste%}
+    {% block title %}
+    List of call of roll
+    {% endblock %}
+
+    {% block content %}
+        <div class="container">
+        <div class="row"><h3>Cursus call of roll</h3></div>
+        {% for presence in Presence_list %}
+            <a href='/lycee/cursuscall/view/{{presence.id}}'>
+                <div class="row">
+                    <div class='col-sm-2'>
+                        {{presence.date}}
+                    </div>
+                    <div class='col'>
+                        {{presence.cursus}}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+
+            <div class="row"><h3>Particular call of roll</h3></div>
+            {% for particularPresence in ParticularPresence_list %}
+                <a href='#'>
+                    <div class="row">
+                        <div class='col-sm-2'>
+                            {{particularPresence.date}}
+                        </div>
+
+                        <div class='col-sm-2'>
+                            {{particularPresence.reason}}
+                        </div>
+
+                        <div class='col'>
+                            {{particularPresence.student}}
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endblock %}
+{% else %}
+    <p>No Cursus to show</p>
+{% endif %}

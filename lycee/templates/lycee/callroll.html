@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    {{ cursus.name }} : Call of roll
+{% endblock%}
+
+{% block content %}
+    <h2>Select date and check if student is missing</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class="buttons">
+            <button class="btn btn-primary radius left" type='cancel'>
+                <a href={% url 'index' %}>Cancel</a>
+            </button>
+            <button class="btn btn-success radius right" type='submit'>
+                Submit
+            </button>
+        </div>
+    </form>
+{% endblock %}
+

@@ -1,5 +1,6 @@
 from django.forms.models import ModelForm
-from .models import Student, Presence
+from .models import Student, Presence, ParticularPresence
+from django.forms.widgets import CheckboxSelectMultiple
 
 
 class StudentForm(ModelForm):
@@ -16,12 +17,24 @@ class StudentForm(ModelForm):
         )
 
 
-class ParticularCallForm(ModelForm):
+class ParticularCallRollForm(ModelForm):
     class Meta:
-        model = Presence
+        model = ParticularPresence
         fields = (
             "reason",
             "is_missing",
             "date",
             "student"
         )
+
+
+class CallRollForm(ModelForm):
+  class Meta:
+    model = Presence
+    fields = [
+      'date',
+      'student'
+      ]
+    widgets = {
+        'student' : CheckboxSelectMultiple()
+    }
